@@ -93,7 +93,11 @@ string infix_to_postfix(string& infix_exp)
     }
     //Take all whitespace from string and remove
     postfix.erase(remove_if(postfix.begin(), postfix.end(), ::isspace), postfix.end());
+    //Remove any occurrence of '(' or ')' while keeping format correct
+    postfix.erase(remove(postfix.begin(), postfix.end(), '('), postfix.end());
+    postfix.erase(remove(postfix.begin(), postfix.end(), ')'), postfix.end());
     string postfix_to_eval;
+    
     //New string that adds space between all char and return string
     for (auto itr : postfix) {
         postfix_to_eval += itr;
