@@ -1,6 +1,7 @@
+#include "Infix_To_Postfix.h"
+
 #include <iostream>
 #include <stack>
-#include <string>
 
 using namespace std;
 
@@ -104,15 +105,4 @@ string infix_to_postfix(string& infix_exp)
         postfix_to_eval += ' ';
     }
     return postfix_to_eval;
-}
-
-int main() {
-    string infix_exp = "2+2^2*3+(5-3)";
-//    cout << "infix expression: ";
-//    getline(cin, infix_exp);
-    string postfix = infix_to_postfix(infix_exp);
-    cout << "converted to postfix: " << postfix << endl;
-
-    system("pause");
-    return 0;
 }

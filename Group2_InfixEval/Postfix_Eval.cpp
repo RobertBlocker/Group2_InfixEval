@@ -1,6 +1,6 @@
-#include <iostream>
+#include "Postfix_Eval.h"
+
 #include <stack>
-#include <string>
 #include <sstream>
 #include <cmath>
 
@@ -74,13 +74,4 @@ int evaluate(string exp)
         }i++;
     }
     return stack.top();
-}
-
-int main()
-{
-    string exp = "2 2 2 ^ 3 * +";
-    cout << evaluate(exp) << endl;
-    system("pause");
-    return 0;
-    
 }

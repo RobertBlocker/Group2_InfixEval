@@ -1,4 +1,7 @@
-﻿#include <iostream>
+﻿#include "Infix_To_Postfix.h"
+#include "Postfix_Eval.h"
+
+#include <iostream>
 #include <fstream>
 #include <string>
 
@@ -15,11 +18,10 @@ int main() {
     }
     
     string exp;
-    string eval;
 
     while(getline(fin, exp)) {
         cout << exp << endl;
-        //eval = evaluate(infix_to_postfix(exp));
+        int eval = evaluate(infix_to_postfix(exp));
 
         fout << eval << endl;
     }
