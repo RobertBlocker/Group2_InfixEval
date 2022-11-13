@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int is_operator(char op)
+bool is_operator(char op)
 {
     return (op == '|' || op == '&' || op == '=' || op == '!' || op == '>' || op == '<' || op == '+' || op == '-' || op == '*' || op == '/' || op == '%' || op == '^');
 }
@@ -42,14 +42,11 @@ string infix_to_postfix(string infix)
     stack<char> stack;
     string postfix;
 
-    if (infix.size() == 0)
+    for (char ch : infix)
     {
-        return "";
-    }
-    while (infix[i] != '\0') {
-
-        if (!is_operator(infix[i])) {
-            postfix = postfix + infix[i] + ' ';
+        if (!is_operator(ch))
+        {
+            postfix = postfix + infix[i];
             i++;
         }
         else
@@ -57,23 +54,28 @@ string infix_to_postfix(string infix)
             while (!stack.empty() && precedence(infix[i]) <= precedence(stack.top()))
             {
                 postfix += stack.top();
-                postfix += ' ';
                 stack.pop();
             }
             stack.push(infix[i]);
             i++;
         }
     }
+
     while (!stack.empty())
     {
-        postfix = postfix + stack.top() + ' ';
+        postfix = postfix + stack.top();
         stack.pop();
     }
-    return postfix;
+    postfix.erase(remove_if(postfix.begin(), postfix.end(), ::isspace), postfix.end());
+    string postfix_to_eval;
+    for (auto itr : postfix) {
+        postfix_to_eval += itr;
+        postfix_to_eval += ' ';
+    }
+    return postfix_to_eval;
 }
 
-int main()
-{
+int main() {
     string infix = "2+2^2*3";
 //   cout << "infix expression: ";
 //    getline(cin, infix);
@@ -82,13 +84,4 @@ int main()
 
     system("pause");
     return 0;
-
 }
-
-//if (!is_operator(infix[i])) {
-//    while (!is_operator(infix[i + 1])) {
-//        postfix = postfix + infix[i];
-//        i++;
-//    }
-//    postfix += ' ';
-//}
