@@ -41,7 +41,6 @@ int precedence(char op) {
     else if (op == '^') {
         return 7;
     }
-    throw exception("Unsupported operator");
     return 0;
 }
 
