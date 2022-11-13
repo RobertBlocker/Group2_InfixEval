@@ -1,1 +1,1 @@
-"# Group2_InfixEval" 
+# Group2_InfixEval
