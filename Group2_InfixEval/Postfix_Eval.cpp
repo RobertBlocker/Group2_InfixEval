@@ -6,39 +6,39 @@
 
 using namespace std;
 
-int calc(int o1, int o2, char c)
+int calc(int left_op, int right_op, char sign)
 {
-    if (c == '+') { return o1 + o2; }
-    if (c == '-') { return o1 - o2; }
-    if (c == '*') { return o1 * o2; }
-    if (c == '/') { 
-        if (o2 == 0) { throw "divide by zero."; }
-        else { return o1 / o2; }
+    if (sign == '+') { return left_op + right_op; }
+    if (sign == '-') { return left_op - right_op; }
+    if (sign == '*') { return left_op * right_op; }
+    if (sign == '/') { 
+        if (right_op == 0) { throw "divide by zero."; }
+        else { return left_op / right_op; }
     }
-    if (c == '%') { return o1 % o2; }
-    if (c == '^') { return (int)pow((double)o1, o2); }
-    if (c == '<') {
-        if (o1 < o2) { return 1; }
+    if (sign == '%') { return left_op % right_op; }
+    if (sign == '^') { return (int)pow((double)left_op, right_op); }
+    if (sign == '<') {
+        if (left_op < right_op) { return 1; }
         else { return 0; }
     }
-    if (c == '>') {
-        if (o1 > o2) { return 1; }
+    if (sign == '>') {
+        if (left_op > right_op) { return 1; }
         else { return 0; }
     }
-    if (c == '=') {
-        if (o1 == o2) { return 1; }
+    if (sign == '=') {
+        if (left_op == right_op) { return 1; }
         else { return 0; }
     }
-    if (c == '!') {
-        if (o1 != o2) { return 1; }
+    if (sign == '!') {
+        if (left_op != right_op) { return 1; }
         else { return 0; }
     }
-    if (c == '&') {
-        if (o1 != 0 && o2 != 0) { return 1; }
+    if (sign == '&') {
+        if (left_op != 0 && right_op != 0) { return 1; }
         else { return 0; }
     }
-    if (c == '|') {
-        if (o1 == 0 && o2 == 0) { return 1; }
+    if (sign == '|') {
+        if (left_op == 0 && right_op == 0) { return 1; }
         else { return 0; }
     }
     else return 0;
@@ -47,31 +47,33 @@ int calc(int o1, int o2, char c)
 int evaluate(string exp)
 {
     int result = 0;
-    stack<int> s;
-    int dig = 0;
+    stack<int> stack;
+    int num = 0;
     int i = 0;
+
     while (i < exp.length())
     {
-        char e = exp[i];
+        char curr = exp[i];
+
         if (isdigit(exp[i])) {
-            dig = dig * 10 + (exp[i] - '0');
+            num = num * 10 + (exp[i] - '0');
         }
         else if (exp[i] == ' ') {
-            s.push(dig);
-            dig = 0;
+            stack.push(num);
+            num = 0;
         }
         else {
-            int o2 = s.top();
-            s.pop();
-            int o1 = s.top();
-            s.pop();
-            result = calc(o1, o2, e);
-            s.push(result);
+            int right_op = stack.top();
+            stack.pop();
+            int left_op = stack.top();
+            stack.pop();
+            result = calc(left_op, right_op, curr);
+            stack.push(result);
             i++;
 
         }i++;
     }
-    return s.top();
+    return stack.top();
 }
 
 int main()
