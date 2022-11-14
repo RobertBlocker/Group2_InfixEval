@@ -5,6 +5,12 @@
 
 using namespace std;
 
+/** Calculates for a single operator.
+    @param left_op: left operands for operation
+    @param right_op: right operands for operation
+    @param sign: 
+    @return: int for evaluated operation
+*/
 int calc(int left_op, int right_op, char sign)
 {
     if (sign == '+') { return left_op + right_op; }
@@ -51,6 +57,10 @@ int calc(int left_op, int right_op, char sign)
     else return 0;
 }
 
+/** Evaluates the postfix expression string to an integer.
+    @param exp: the string of expression to be evaluated
+    @return: integer of evaluated string
+*/
 int evaluate(string exp)
 {
     int result = 0;
