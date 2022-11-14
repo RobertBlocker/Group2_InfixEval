@@ -1,6 +1,6 @@
-#include "Postfix_Eval.h"
-
+#include <iostream>
 #include <stack>
+#include <string>
 #include <sstream>
 #include <cmath>
 
@@ -23,6 +23,14 @@ int calc(int left_op, int right_op, char sign)
     }
     if (sign == '>') {
         if (left_op > right_op) { return 1; }
+        else { return 0; }
+    }
+    if (sign == '$') {
+        if (left_op >= right_op) { return 1; }
+        else { return 0; }
+    }
+    if (sign == '#') {
+        if (left_op <= right_op) { return 1; }
         else { return 0; }
     }
     if (sign == '=') {
@@ -55,6 +63,7 @@ int evaluate(string exp)
     {
         char curr = exp[i];
 
+
         if (isdigit(exp[i])) {
             num = num * 10 + (exp[i] - '0');
         }
@@ -71,7 +80,16 @@ int evaluate(string exp)
             stack.push(result);
             i++;
 
-        }i++;
+        }i++; 
     }
     return stack.top();
+}
+
+int main()
+{
+    string exp = "2 2 % 2 2 ^ + 5 3 2 ^ * -";
+    cout << evaluate(exp) << endl;
+    system("pause");
+    return 0;
+    
 }
