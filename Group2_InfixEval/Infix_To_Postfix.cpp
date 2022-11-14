@@ -29,7 +29,7 @@ int precedence(char op) {
         return 3;
     }
     else if (op == '>' || op == '<') {
-        return 6;
+        return 4;
     }
     else if (op == '+' || op == '-') {
         return 5;
@@ -63,7 +63,6 @@ string infix_to_postfix(string& infix_exp) {
             while (stack.top() != '(') {
                 postfix += stack.top();
                 stack.pop();
-                i++;
             }
             //pop opening '('
             stack.pop();
