@@ -1,4 +1,4 @@
-﻿#include "Infix_To_Postfix.h"
+#include "Infix_To_Postfix.h"
 #include "Postfix_Eval.h"
 
 #include <iostream>
@@ -11,16 +11,17 @@ int main() {
     ifstream fin("input.txt");
     ofstream fout("output.txt");
 
+    //Error if text file does not exist
     if (!fin) {
         cout << "The input file does not exist." << endl;
         system("pause");
         return -1;
     }
-    
-    string exp;
 
-    while(getline(fin, exp)) {
-        cout << exp << endl;
+    string exp;
+    //cout to test that expressions were selected correctly
+    while (getline(fin, exp)) {
+        //cout << exp << endl;
         int eval = evaluate(infix_to_postfix(exp));
 
         fout << eval << endl;
@@ -29,5 +30,8 @@ int main() {
     fin.close();
     fout.close();
     
+    //ending message
+    cout << endl << "Thank you!" << endl;
+    system("pause");
     return 0;
 }
