@@ -1,4 +1,3 @@
-#include <iostream>
 #include <stack>
 #include <string>
 #include <sstream>
@@ -83,13 +82,4 @@ int evaluate(string exp)
         }i++; 
     }
     return stack.top();
-}
-
-int main()
-{
-    string exp = "2 2 % 2 2 ^ + 5 3 2 ^ * -";
-    cout << evaluate(exp) << endl;
-    system("pause");
-    return 0;
-    
 }
